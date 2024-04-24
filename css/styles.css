@@ -1,7 +1,11 @@
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+}
+
+body {
+  padding-bottom: 24px;
+  display: flex;
+  justify-content: center;
 }
 
 .gallery {
@@ -9,12 +13,14 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 24px;
+  padding-left: 0;
 }
 
-li {
+.gallery-item {
   transition: transform 0.5s;
+  list-style: none;
 }
 
-li:hover {
+.gallery-item:hover {
   transform: scale(1.03);
 }

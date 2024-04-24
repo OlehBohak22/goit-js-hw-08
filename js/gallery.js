@@ -1,7 +1,7 @@
 const images = [
   {
     preview:
-      "https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__480.jpg",
+      "https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__340.jpg",
     original:
       "https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820_1280.jpg",
     description: "Hokkaido Flower",
@@ -63,22 +63,22 @@ const images = [
     description: "Lighthouse Coast Sea",
   },
 ];
-
 const gallery = document.querySelector(".gallery");
 
 const preview = images.map(
-  (obj) =>
-    `<img class="gallery-item" src="${obj.preview}" data-source="${obj.original}" alt="${obj.description}" width="510" height="340"/>`
+  ({ preview, original, description }) =>
+    `<a href="${original}" class="gallery-link"><img class="gallery-image" src="${preview}" data-source="${original}" alt="${description}" width="510" height="340"/></a>`
 );
 
 preview.forEach((image) => {
   const li = document.createElement("li");
   li.innerHTML = image;
-  li.style.listStyle = "none";
+  li.classList.add("gallery-item");
   gallery.append(li);
 });
 
 gallery.addEventListener("click", (event) => {
+  event.preventDefault();
   const target = event.target;
 
   if (target.tagName === "IMG") {
@@ -86,7 +86,7 @@ gallery.addEventListener("click", (event) => {
     const alt = target.getAttribute("alt");
 
     const modalContent = `<img src="${src}" alt="${alt}"/>`;
-    const instance = basicLightbox.create(`<div>${modalContent}</div>`);
+    const instance = basicLightbox.create(modalContent);
 
     instance.show();
   }
